@@ -1,41 +1,43 @@
 \chapter{Нефункциональные требования}
 \label{ch:nonfunctional}
 
+\section{Требования к окружению}
+Среда функционирования ПО описана в разделе \ref{sec:environment}.\\ <<simple-routine>> - \href{https://github.com/cncf/toc/blob/main/DEFINITION.md#\%D1\%80\%D1\%83\%D1\%81\%D1\%81\%D0\%BA\%D0\%B8\%D0\%B9}{\color{blue}{cloud native}} приложение и должно соответствовать стандартам Cloud Native Computing Foundation. 
+
+Оркестрация должна быть реализована с использованием Kubernetes. Для поддержания высокого уровня доступности сервиса планируется воспользоваться услугами внешних провайдеров, таких как Amazon Web Services и Google Cloud, которые гарантируют высокий уровень качества предоставления услуг в своих соглашениях об уровне услуг (Service Level Agreement, SLA). Гарантированная доступность сервиса <<simple-routine>> должна соответствовать - 95\% в месяц. Для повышения уровня доверия к сервису необходимо сформировать SLA и предоставить его пользователям на основной странице сервиса. 
+
+Необходим режим с пониженным использованием интернет-трафика --- для экономии интернет-трафика пользователя, в таком режиме пользователь должен иметь возможность увидеть объем потребляемого трафика, а также изменить качество вспомогательных элементов (картинки, стили).
+
 \section{Требования к производительности}
-$<$If there are performance requirements for the product under various 
-circumstances, state them here and explain their rationale, to help the 
-developers understand the intent and make suitable design choices. Specify the 
-timing relationships for real time systems. Make such requirements as specific 
-as possible. You may need to state performance requirements for individual 
-functional requirements or features.$>$
+Приложение должно эффективно работать на смартфоне, а также на ПК. Страницы web-приложения должны загружаться не дольше 3х секунд. Отклик для мобильного приложения должен составлять не больше секунды. Среднее значение статистик при прохождении анализатора \href{https://developers.google.com/web/tools/lighthouse}{\color{blue}{Google Lighthouse}} должно быть не меньше 95.
+
 
 \section{Требования к сохранности (данных)}
-$<$Specify any requirements regarding security or privacy issues surrounding use 
-of the product or protection of the data used or created by the product. Define 
-any user identity authentication requirements. Refer to any external policies or 
-regulations containing security issues that affect the product. Define any 
-security or privacy certifications that must be satisfied.$>$
+\begin{itemize}
+    \item Процесс аутентификации должен соответствовать стандарту OAuth 2.0, с поддержкой формата токена JSON Web Token (JWT);
+    \item Чувствительные пользовательские данные должны должны храниться в зашифрованном виде;
+    \item Необходимо гарантировать восстановление пользовательских данных за последние 8 часов работы сервиса при условии падения сервиса;
+    \item Способность к резервному копированию данных;
+    \item Архивирование действий пользователей и системных событий;
+    \item Данные внесенные в <<офлайн режиме>> должны быть синхронизированы с хранилищем при восстановлении связи.
+\end{itemize}
 
 \section{Критерии качества ПО}
-$<$Specify any additional quality characteristics for the product that will be 
-important to either the customers or the developers. Some to consider are: 
-adaptability, availability, correctness, flexibility, interoperability, 
-maintainability, portability, reliability, reusability, robustness, testability, 
-and usability. Write these to be specific, quantitative, and verifiable when 
-possible. At the least, clarify the relative preferences for various attributes, 
-such as ease of use over ease of learning.$>$
+\begin{itemize}
+    \item Возможность установки через GooglePlay с устройства, а также через ПК;
+    \item Отсутствие утечек памяти;
+    \item Низкий уровень потребления энергии при работе в фоновом режиме;
+    \item Выполнение описанных в документе функциональных и нефункциональных требований;
+    \item Уровень тестового прокрытия - 85\%;
+    \item Прохождение статических анализаторов кода;
+    \item Высокий уровень мониторинга работы сервиса и поддержание трассировки пользовательских запросов в серсиве (с использованием стандарта OpenTelemetry).
+\end{itemize}
+
 
 \section{Требования к безопасности системы}
-$<$Specify those requirements that are concerned with possible loss, damage, or 
-harm that could result from the use of the product. Define any safeguards or 
-actions that must be taken, as well as actions that must be prevented. Refer to 
-any external policies or regulations that state safety issues that affect the 
-product’s design or use. Define any safety certifications that must be 
-satisfied.$>$
+Приложение должно поддерживать шифрование персональных данных пользователей при записи в память во избежание утечки информации. Необходима строгая аутентификация и авторизация, а также привязка процессов внутри приложения к идентификатору пользователя. В случае нарушения безопасности системы необходимо иметь возможность точно оценить уровень утечки и оперативно уведомить пользователей. 
 
 
 \section{Прочие требования}
-$<$List any operating principles about the product, such as which individuals or 
-roles can perform which functions under specific circumstances. These are not 
-functional requirements in themselves, but they may imply certain functional 
-requirements to enforce the rules.$>$
+
+Все основые требования описаны в разделах \ref{ch:functionality} и \ref{ch:nonfunctional}.
