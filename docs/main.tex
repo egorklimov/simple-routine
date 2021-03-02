@@ -1,0 +1,28 @@
+\documentclass{scrreprt}
+\input{bootstrap}
+\input{variables}
+
+\begin{document}
+
+\begin{flushright}
+    \rule{16cm}{5pt}\vskip1cm
+    \begin{bfseries}
+        \Huge{СПЕЦИФИКАЦИЯ ТРЕБОВАНИЙ\\ К ПРОЕКТУ}\\
+        \vspace{3.0cm}
+        \huge{<<\vProjectName>>}\\
+        \vspace*{\fill}
+        \LARGE{\vCurrentVersion}\\
+        \today\\
+    \end{bfseries}
+\end{flushright}
+
+\tableofcontents
+
+\input{chapters/revision}
+\input{chapters/introduction}
+\input{chapters/overall-description}
+\input{chapters/functionality}
+\input{chapters/nonfunctional-requirements}
+\input{chapters/appendix}
+
+\end{document}
