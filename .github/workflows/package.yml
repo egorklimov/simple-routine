@@ -1,0 +1,21 @@
+name: Build docs
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: main.tex
+          working_directory: docs/
+          args: -jobname=software-requirements-specification -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          compiler: latexmk
+      - name: Upload pdf document
+        uses: actions/upload-artifact@v2
+        with:
+          name: software-requirements-specification
+          path: docs/software-requirements-specification.pdf
